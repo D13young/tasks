@@ -5,7 +5,7 @@ int main() {
     bool run = true;
     char answer;
     cout << "------------------------\n";
-    cout << "\tGRILNICA" << endl;
+    cout << "\tG - RILNICA" << endl;
     cout << "grill and bar restaurant\n";
     cout << "------------------------\n";
     cout << "Тumber of persons: ";
