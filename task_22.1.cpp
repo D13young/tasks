@@ -1,51 +1,51 @@
 #include <iostream>
-#include <algorithm>
-#include <unordered_set>
-
 using namespace std;
 
+struct Complex {
+    double real;
+    double imag;
+};
+
+Complex operator+(const Complex& a, const Complex& b) {
+    return { a.real + b.real, a.imag + b.imag };
+}
+
+Complex operator-(const Complex& a, const Complex& b) {
+    return { a.real - b.real, a.imag - b.imag };
+}
+
+Complex operator*(const Complex& a, const Complex& b) {
+    return { a.real * b.real - a.imag * b.imag, a.real * b.imag + a.imag * b.real };
+}
+
+Complex operator/(const Complex& a, const Complex& b) {
+    double denominator = b.real * b.real + b.imag * b.imag;
+    return { (a.real * b.real + a.imag * b.imag) / denominator, (a.imag * b.real - a.real * b.imag) / denominator };
+}
+
+ostream& operator<<(ostream& out, const Complex& c) {
+    out << c.real;
+    if (c.imag >= 0) {
+        out << " + " << c.imag << "i";
+    }
+    else {
+        out << " - " << -c.imag << "i";
+    }
+    return out;
+}
+
 int main() {
-    cout << "Home task #21.1\n\n";
-    int M, N;
-    cout << "Enter size of array A (M): ";
-    cin >> M;
-    cout << "Enter size of array B (N): ";
-    cin >> N;
+    cout << "Home task #22.1\n\n";
+    Complex a = { 1.0, 2.0 };
+    Complex b = { 3.0, 4.0 };
 
-    int* A = new int[M];
-    int* B = new int[N];
+    cout << "a: " << a << endl;
+    cout << "b: " << b << endl;
 
-    cout << "Enter array elements A: ";
-    for (int i = 0; i < M; i++) {
-        cin >> A[i];
-    }
-    cout << "Enter array elements B: ";
-    for (int i = 0; i < N; i++) {
-        cin >> B[i];
-    }
-    unordered_set<int> setB(B, B + N);
-    int sizeC = 0;
-    for (int i = 0; i < M; i++) {
-        if (setB.find(A[i]) == setB.end()) {
-            sizeC++;
-        }
-    }
-    int* C = new int[sizeC];
-    int k = 0;
-    for (int i = 0; i < M; i++) {
-        if (setB.find(A[i]) == setB.end()) {
-            C[k++] = A[i];
-        }
-    }
-    cout << "Array C: ";
-    for (int i = 0; i < sizeC; i++) {
-        cout << C[i] << " ";
-    }
-    cout << "\n";
-
-    delete[] A;
-    delete[] B;
-    delete[] C;
+    cout << "a + b: " << a + b << endl;
+    cout << "a - b: " << a - b << endl;
+    cout << "a * b: " << a * b << endl;
+    cout << "a / b: " << a / b << endl;
 
     return 0;
 }
